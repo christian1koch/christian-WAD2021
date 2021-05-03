@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WAD Web App</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
+    <div class="container">
+        <div id = "login-screen">
+            <img src="Pink-map-icon.png" alt="Pink map Icon" width="100" height="100">
+            <h1>Welcome to <span class = "color-title">WAP APP MAP</span></h1>
+            <div class = "error-container"></div>
+            <form class = "login-form">
+                <input type="text" name="" placeholder="Username" required>
+                <input type="password" name="" placeholder="Password" required>
+                <input type="submit" name="" value="login">
+            </form>
+        </div>
+    <div id="add-new-address-screen">
+            <h1>Add new Address</h1>
+            <form class = "add-form">
+                <input type="text" name="titel" placeholder="Titel">
+                <fieldset>
+                    <input id="Maennlich" type="radio" name="geschlecht" value="m">
+                    <label for="Maennlich">M</label>
+                    <input id="Weiblich" type="radio" name="geschlecht" value="w">
+                    <label for="Weiblich">W</label>
+                    <input id="Diverse" type="radio" name="geschlecht" value="d">
+                    <label for="Diverse">D</label>
+                </fieldset>
+                <input type="text" name="vorname" placeholder="Vorname" required>
+                <input type="text" name="nachname" placeholder="Nachname" required>
+                <input type="text" name="strasse" placeholder="Straße" required>
+                <input type="number" name="hausnummer" placeholder="Hausnummer" required>
+                <input type="number" name="plz" placeholder="PLZ" required>
+                <input type="text" name="stadt" placeholder="Stadt" required>
+                <input type="text" name="land" placeholder="Land" required>
+                <input type="text" name="email" placeholder="Email">
+                <div class = "privacy">
+                    <label for="visibility">private?</label>
+                    <input type="checkbox" name="visibility" value=1 checked>
+                </div>
+                <input type="submit" name="Add" value="Add">
+            </form>
+        </div>
+        <div id="update-delete-address-screen">
+            <h1>Update/Delete Address</h1>
+            <form class = "edit-contact-form">
+                <label for="titel">Titel</label>
+                <input type="text" name="titel" placeholder="Titel">
+                <fieldset>
+                    <input id="Maennlich" type="radio" name="geschlecht" value="m">
+                    <label for="Maennlich">M</label>
+                    <input id="Weiblich" type="radio" name="geschlecht" value="w">
+                    <label for="Weiblich">W</label>
+                    <input id="Diverse" type="radio" name="geschlecht" value="d">
+                    <label for="Diverse">D</label>
+                </fieldset>
+                <input type="text" name="vorname" placeholder="Vorname" required>
+                <input type="text" name="nachname" placeholder="Nachname" required>
+                <input type="text" name="strasse" placeholder="Straße" required>
+                <input type="number" name="hausnummer" placeholder="Hausnummer" required>
+                <input type="number" name="plz" placeholder="PLZ" required>
+                <input type="text" name="stadt" placeholder="Stadt" required>
+                <input type="text" name="land" placeholder="Land" required>
+                <input type="text" name="email" placeholder="Email">
+                <div class = "privacy">
+                    <label for="visibility">Private?</label>
+                    <input type="checkbox" name="visibility" value=1 checked>
+                </div>
+                <div class = "update-delete-buttons">
+                    <input type="submit" name="update" value="Update">
+                    <input type="submit" name="delete" value="Delete">
+                </div>
+            </form>
+        </div>
+</html>
