@@ -1,77 +1,138 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WAD Web App</title>
+        <title>Adviz Christian Koch</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/Stylesheet.css">
     </head>
-    <div class="container">
-        <div id = "login-screen">
-            <img src="Pink-map-icon.png" alt="Pink map Icon" width="100" height="100">
-            <h1>Welcome to <span class = "color-title">WAP APP MAP</span></h1>
-            <div class = "error-container"></div>
-            <form class = "login-form">
-                <input type="text" name="" placeholder="Username" required>
-                <input type="password" name="" placeholder="Password" required>
-                <input type="submit" name="" value="login">
-            </form>
-        </div>
-    <div id="add-new-address-screen">
-            <h1>Add new Address</h1>
-            <form class = "add-form">
-                <input type="text" name="titel" placeholder="Titel">
-                <fieldset>
-                    <input id="Maennlich" type="radio" name="geschlecht" value="m">
-                    <label for="Maennlich">M</label>
-                    <input id="Weiblich" type="radio" name="geschlecht" value="w">
-                    <label for="Weiblich">W</label>
-                    <input id="Diverse" type="radio" name="geschlecht" value="d">
-                    <label for="Diverse">D</label>
-                </fieldset>
-                <input type="text" name="vorname" placeholder="Vorname" required>
-                <input type="text" name="nachname" placeholder="Nachname" required>
-                <input type="text" name="strasse" placeholder="Straße" required>
-                <input type="number" name="hausnummer" placeholder="Hausnummer" required>
-                <input type="number" name="plz" placeholder="PLZ" required>
-                <input type="text" name="stadt" placeholder="Stadt" required>
-                <input type="text" name="land" placeholder="Land" required>
-                <input type="text" name="email" placeholder="Email">
-                <div class = "privacy">
-                    <label for="visibility">private?</label>
-                    <input type="checkbox" name="visibility" value=1 checked>
+    <body>
+        <div class="container">
+            <div id = "login-screen">
+                    <h1>Welcome to Adviz</h1>
+                    <div class = "error-container"></div>
+                    <form class = "login-form forms">
+                        <h2 class = "title-name">LOG IN</h2>
+                        <input type="text" name="" placeholder="Username" required>
+                        <input type="password" name="" placeholder="Password" required>
+                        <input type="submit" name="" value="Login">
+                    </form>
                 </div>
-                <input type="submit" name="Add" value="Add">
-            </form>
-        </div>
-        <div id="update-delete-address-screen">
-            <h1>Update/Delete Address</h1>
-            <form class = "edit-contact-form">
-                <label for="titel">Titel</label>
-                <input type="text" name="titel" placeholder="Titel">
-                <fieldset>
-                    <input id="Maennlich" type="radio" name="geschlecht" value="m">
-                    <label for="Maennlich">M</label>
-                    <input id="Weiblich" type="radio" name="geschlecht" value="w">
-                    <label for="Weiblich">W</label>
-                    <input id="Diverse" type="radio" name="geschlecht" value="d">
-                    <label for="Diverse">D</label>
-                </fieldset>
-                <input type="text" name="vorname" placeholder="Vorname" required>
-                <input type="text" name="nachname" placeholder="Nachname" required>
-                <input type="text" name="strasse" placeholder="Straße" required>
-                <input type="number" name="hausnummer" placeholder="Hausnummer" required>
-                <input type="number" name="plz" placeholder="PLZ" required>
-                <input type="text" name="stadt" placeholder="Stadt" required>
-                <input type="text" name="land" placeholder="Land" required>
-                <input type="text" name="email" placeholder="Email">
-                <div class = "privacy">
-                    <label for="visibility">Private?</label>
-                    <input type="checkbox" name="visibility" value=1 checked>
+            <div id="add-new-address-screen" class="forms">
+                <h1>Add new Address</h1>
+                    <form class = "add-form ">
+                        
+                        <input type="text" name="titel" placeholder="Titel">
+                            <input id="Maennlich" type="radio" name="geschlecht" value="m">
+                            <label for="Maennlich">M</label>
+                            <input id="Weiblich" type="radio" name="geschlecht" value="w">
+                            <label for="Weiblich">W</label>
+                            <input id="Diverse" type="radio" name="geschlecht" value="d">
+                            <label for="Diverse">D</label>
+
+                        <input type="text" name="vorname" placeholder="Vorname" required>
+                        <input type="text" name="nachname" placeholder="Nachname" required>
+                        <input type="text" name="strasse" placeholder="Straße" required>
+                        <input type="number" name="hausnummer" placeholder="Hausnummer" required>
+                        <input type="number" name="plz" placeholder="PLZ" required>
+                        <input type="text" name="stadt" placeholder="Stadt" required>
+                        <input type="text" name="land" placeholder="Land" required>
+                        <input type="text" name="email" placeholder="Email">
+                        <div class = "privacy">
+                            <label for="visibility">private?</label>
+                            <input type="checkbox" name="visibility" value=1 checked>
+                        </div>
+                        <select name="add-owner" id="add-owner">
+                            <option value="normalo">Normalo</option>
+                            <option value="admina">Admina</option>
+                        </select>
+                        <input type="submit" name="Add" value="Add">
+                    </form>
+            </div>
+            <div id="update-delete-address-screen " class="forms">
+                <h1>Update/Delete Address</h1>
+                <form class = "edit-contact-form">
+                    <label for="titel">Titel</label>
+                    <input type="text" name="titel" placeholder="Titel">
+
+                        <input id="Maennlich" type="radio" name="geschlecht" value="m">
+                        <label for="Maennlich">M</label>
+                        <input id="Weiblich" type="radio" name="geschlecht" value="w">
+                        <label for="Weiblich">W</label>
+                        <input id="Diverse" type="radio" name="geschlecht" value="d">
+                        <label for="Diverse">D</label>
+
+                    <input type="text" name="vorname" placeholder="Vorname" required>
+                    <input type="text" name="nachname" placeholder="Nachname" required>
+                    <input type="text" name="strasse" placeholder="Straße" required>
+                    <input type="number" name="hausnummer" placeholder="Hausnummer" required>
+                    <input type="number" name="plz" placeholder="PLZ" required>
+                    <input type="text" name="stadt" placeholder="Stadt" required>
+                    <input type="text" name="land" placeholder="Land" required>
+                    <input type="text" name="email" placeholder="Email">
+                    <div class = "privacy">
+                        <label for="visibility">Private?</label>
+                        <input type="checkbox" name="visibility" value=1 checked>
+                    </div>
+                    <select name="update-owner" id="update-owner">
+                        <option value="normalo">Normalo</option>
+                        <option value="admina">Admina</option>
+                    </select>
+                    <div class = "update-delete-buttons">
+                        <input type="submit" name="update" value="Update">
+                        <input type="submit" name="delete" value="Delete">
+                    </div>
+
+                </form>
+            </div>
+            <div id ="main-screen">
+            <div class = "adresses">
+                <input type="button" name="Maria" value="Maria">
+                <input type="button" name="Tania" value="Tania">
+                <input type="button" name="Paco" value="Paco">
+            </div>
+            
+            <div id = map-with-buttons>
+                <div class = "main-buttons">
+                    <input type="button" name="show-my-contacts" value="Show my contacts">
+                    <input type="button" name="show-all-contacts" value="Show all contacts">
+                    <input type="button" name="add-new-contact" value="Add new contact">
                 </div>
-                <div class = "update-delete-buttons">
-                    <input type="submit" name="update" value="Update">
-                    <input type="submit" name="delete" value="Delete">
-                </div>
-            </form>
+                <div id = "map"></div>
+
+            
+            </div>
+            <div class = "left-item"></div>
+            </div>
+            <script>
+                function initMap(){
+                var options = {
+                    zoom:11,
+                    center: {lat:52.520008,lng: 13.404954}
+                }
+
+                var map = new google.maps.Map(document.getElementById('map'), options);
+                var marker1 = new google.maps.Marker({
+                    position:{lat:52.530661197322544, lng:13.435732490989},
+                    map: map,
+                    text: 'Paco'
+                });
+                var marker2 = new google.maps.Marker({
+                    position:{lat:52.535596086960865, lng:13.389137928986809},
+                    map: map,
+                    text: 'Paco'
+                });
+                var marker3 = new google.maps.Marker({
+                    position:{lat:52.50334161368637, lng:13.410060619684728},
+                    map: map,
+                    text: 'Paco'
+                });
+                }
+            </script>
         </div>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDnSGnisVvqYDDW1Vvz50RoNywg_07TUY&callback=initMap&libraries=&v=weekly"
+        
+      ></script>
+    </body>
 </html>
