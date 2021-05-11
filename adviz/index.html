@@ -3,13 +3,13 @@
     <head>
         <title>Adviz Christian Koch</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/Stylesheet.css">
     </head>
     <body>
         <div class="container">
             <div id = "login-screen">
-                    <h1>Welcome to Adviz</h1>
+                    <h1>Almost before we knew</h1>
                     <div class = "error-container"></div>
                     <form class = "login-form forms">
                         <h2 class = "title-name">LOG IN</h2>
@@ -21,8 +21,7 @@
             <div id="add-new-address-screen" class="forms">
                 <h1>Add new Address</h1>
                     <form class = "add-form ">
-                        
-                        <input type="text" name="titel" placeholder="Titel">
+
                             <input id="Maennlich" type="radio" name="geschlecht" value="m">
                             <label for="Maennlich">M</label>
                             <input id="Weiblich" type="radio" name="geschlecht" value="w">
@@ -30,13 +29,14 @@
                             <input id="Diverse" type="radio" name="geschlecht" value="d">
                             <label for="Diverse">D</label>
 
-                        <input type="text" name="vorname" placeholder="Vorname" required>
-                        <input type="text" name="nachname" placeholder="Nachname" required>
-                        <input type="text" name="strasse" placeholder="Straße" required>
-                        <input type="number" name="hausnummer" placeholder="Hausnummer" required>
-                        <input type="number" name="plz" placeholder="PLZ" required>
-                        <input type="text" name="stadt" placeholder="Stadt" required>
-                        <input type="text" name="land" placeholder="Land" required>
+                        <input type="text" name="vorname" placeholder="First Name" required>
+                        <input type="text" name="nachname" placeholder="Last Name" required>
+                        <input type="text" name="strasse" placeholder="Street" required>
+                        <input type="number" name="hausnummer" placeholder="Street Number" required>
+                        <input type="number" name="plz" placeholder="Postal Code" required>
+                        <input type="text" name="stadt" placeholder="City" required>
+                        <input type="text" name="bundesland" placeholder="State" required>
+                        <input type="text" name="land" placeholder="Country" required>
                         <input type="text" name="email" placeholder="Email">
                         <div class = "privacy">
                             <label for="visibility">private?</label>
@@ -49,26 +49,23 @@
                         <input type="submit" name="Add" value="Add">
                     </form>
             </div>
-            <div id="update-delete-address-screen " class="forms">
+            <div id="update-delete-address-screen" class="forms">
                 <h1>Update/Delete Address</h1>
                 <form class = "edit-contact-form">
-                    <label for="titel">Titel</label>
-                    <input type="text" name="titel" placeholder="Titel">
-
                         <input id="Maennlich" type="radio" name="geschlecht" value="m">
                         <label for="Maennlich">M</label>
                         <input id="Weiblich" type="radio" name="geschlecht" value="w">
                         <label for="Weiblich">W</label>
                         <input id="Diverse" type="radio" name="geschlecht" value="d">
                         <label for="Diverse">D</label>
-
-                    <input type="text" name="vorname" placeholder="Vorname" required>
-                    <input type="text" name="nachname" placeholder="Nachname" required>
-                    <input type="text" name="strasse" placeholder="Straße" required>
-                    <input type="number" name="hausnummer" placeholder="Hausnummer" required>
-                    <input type="number" name="plz" placeholder="PLZ" required>
-                    <input type="text" name="stadt" placeholder="Stadt" required>
-                    <input type="text" name="land" placeholder="Land" required>
+                    <input type="text" name="vorname" placeholder="First Name" required>
+                    <input type="text" name="nachname" placeholder="Last Name" required>
+                    <input type="text" name="strasse" placeholder="Street" required>
+                    <input type="number" name="hausnummer" placeholder="Street Number" required>
+                    <input type="number" name="plz" placeholder="Postal Code" required>
+                    <input type="text" name="stadt" placeholder="City" required>
+                    <input type="text" name="bundesland" placeholder="State" required>
+                    <input type="text" name="land" placeholder="Country" required>
                     <input type="text" name="email" placeholder="Email">
                     <div class = "privacy">
                         <label for="visibility">Private?</label>
@@ -86,23 +83,23 @@
                 </form>
             </div>
             <div id ="main-screen">
-            <div class = "adresses">
-                <input type="button" name="Maria" value="Maria">
-                <input type="button" name="Tania" value="Tania">
-                <input type="button" name="Paco" value="Paco">
-            </div>
-            
-            <div id = map-with-buttons>
-                <div class = "main-buttons">
-                    <input type="button" name="show-my-contacts" value="Show my contacts">
-                    <input type="button" name="show-all-contacts" value="Show all contacts">
-                    <input type="button" name="add-new-contact" value="Add new contact">
+                <div class = "adresses">
+                    <input type="button" name="Maria" value="Maria">
+                    <input type="button" name="Tania" value="Tania">
+                    <input type="button" name="Paco" value="Paco">
                 </div>
-                <div id = "map"></div>
+                
+                <div id = "map-with-buttons">
+                    <div class = "main-buttons">
+                        <input type="button" name="show-my-contacts" value="Show my contacts">
+                        <input type="button" name="show-all-contacts" value="Show all contacts">
+                        <input type="button" name="add-new-contact" value="Add new contact">
+                    </div>
+                    <div id = "map"></div>
 
-            
-            </div>
-            <div class = "left-item"></div>
+                
+                </div>
+                <div class = "left-item"></div>
             </div>
             <script>
                 function initMap(){

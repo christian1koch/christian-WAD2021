@@ -1,18 +1,26 @@
+
+:root{
+    --main-pink: #E93793;
+    --intense-pink: #bf0b68;
+    --deep-pink: #fc309a;
+    --pansy-purple: #82194f;
+    --smitten: #fc6fb8;
+    --dark-gray: #1d1b1c;
+}
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
+
 html {
     height: 100%;
-    background: rgb(228,194,193);
-    background: linear-gradient(0deg, rgba(228,194,193,1) 26%, rgba(255,88,131,1) 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
+    background: var(--smitten);
+}
 .container {
     text-align: center;
     display:block;
+    color: white;
 }
 .forms {
     margin-left: auto;
@@ -21,7 +29,7 @@ html {
     display:block;
     background-color: pink;
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: white;
     padding: 20px;
     margin-top: 3em;
 }
@@ -85,4 +93,7 @@ html {
 
 .adresses input[type=button]{
     margin-top:3em;
+}
+#main-screen, #update-delete-address-screen, #add-new-address-screen, #map-with-buttons{
+    display:none;
 }
