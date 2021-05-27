@@ -183,6 +183,7 @@ input{
 }
 
 .contact-btn{
+    white-space: normal;
     padding: 3rem;
     width:100%;
     font-family: 'Montserrat', sans-serif;

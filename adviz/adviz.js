@@ -17,6 +17,7 @@ var contact4 = new Contact("Alexander", "Sanchez", "paracelsusstraße 13", "1318
 var contactList = [contact1, contact2, contact3, contact4];
 var currentUser;
 var currentUserContacts;
+var markersOnMap = [];
 userList = [admina, normalo];
 
 //Login Screen Selectors
@@ -67,23 +68,25 @@ function Contact(firstName, lastName, streetAndNumber, zipCode, city, state, cou
 //
 function initMap(){
 currentUserContacts.forEach((contact) => {
-    console.log("setting marker");
-    let mapMarker = new google.maps.Marker({
-        position: getCoordinates(contact.streetAndNumber),
-        map,
-        text: 'Paco',
-    })
-
+    for (let i = 0; i < markersOnMap.length; i++) {
+        markersOnMap[i].setMap(null);
+      }
+    markOnMap(contact);
 }
     
 )
 }
-function getCoordinates(address) {
-    geocoder.geocode( { 'address': address}, function(results, status) {
+function markOnMap(contact) {
+    geocoder.geocode( { 'address': contact.streetAndNumber + " " + contact.zipCode}, function(results, status) {
         if (status == 'OK') {
-            console.log(results);
-            console.log({lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()});
-          return {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}
+            console.log(results[0]);
+            let mapMarker = new google.maps.Marker({
+                position: {lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()},
+                map,
+                text: contact.firstName + " " + contact.lastName,
+            })
+            contact.marker = mapMarker;
+            markersOnMap.push(mapMarker);
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
         }
@@ -113,7 +116,6 @@ loginCredentials = () => {
             welcomeUser();
             console.log(currentUser);
             showContacts(myContacts);
-            initMap();
             loginScreen.classList.toggle("fade");
             //Animation from Login Screen to Main Screen
             setTimeout(() => {
@@ -179,10 +181,17 @@ showContacts = (contactListType) => {
         contactOnLeft.setAttribute("class", "contact-btn");
         contactOnLeft.setAttribute("name", contact.firstName + " " + contact.lastName);
         contactOnLeft.setAttribute("value", contact.firstName + " " + contact.lastName);
+        contactOnLeft.onmouseover = () => {
+            contactOnLeft.setAttribute("value", contact.streetAndNumber + " " + contact.zipCode + " " + contact.city + " - " + contact.country);
+        }
+        contactOnLeft.onmouseout = () => {
+            contactOnLeft.setAttribute("value", contact.firstName + " " + contact.lastName);
+        }
         adresses.appendChild(contactOnLeft);
         contact.sidebarElem = contactOnLeft;
         console.log(adresses);
     })
+    initMap();
 }
 /*
 Logs out the currentUser, bringing the screen back to the login Screen and
