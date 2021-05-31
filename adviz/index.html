@@ -43,32 +43,37 @@
             <div id="add-new-address-screen" class="forms">
                 <h1>Add new Address</h1>
                     <form class = "add-form ">
-
+                        <div id = "sex-radio-btns">
                             <input id="Maennlich" type="radio" name="geschlecht" value="m">
-                            <label for="Maennlich">M</label>
-                            <input id="Weiblich" type="radio" name="geschlecht" value="w">
-                            <label for="Weiblich">W</label>
+                            <label for="Male">M</label>
+                            <input id="Weiblich" type="radio" name="geschlecht" value="f">
+                            <label for="Female">F</label>
                             <input id="Diverse" type="radio" name="geschlecht" value="d">
                             <label for="Diverse">D</label>
-
-                        <input type="text" name="vorname" placeholder="First Name" required>
-                        <input type="text" name="nachname" placeholder="Last Name" required>
-                        <input type="text" name="strasse" placeholder="Street" required>
-                        <input type="number" name="hausnummer" placeholder="Street Number" required>
-                        <input type="number" name="plz" placeholder="Postal Code" required>
-                        <input type="text" name="stadt" placeholder="City" required>
-                        <input type="text" name="bundesland" placeholder="State" required>
-                        <input type="text" name="land" placeholder="Country" required>
-                        <input type="text" name="email" placeholder="Email">
+                        </div>
+                        <input id="form-first-name" type="text" name="vorname" placeholder="First Name*" required>
+                        <input id="form-last-name" type="text" name="nachname" placeholder="Last Name*" required>
+                        <input id="form-street" type="text" name="strasse" placeholder="Street*" required>
+                        <div id="wrong-address-div">Wrong address sweety, please check.</div>
+                        <input id="street-number" type="number" name="hausnummer" placeholder="Street Number*" required>
+                        <input id="form-plz" type="number" name="plz" placeholder="Postal Code*" required>
+                        <input id="form-city" type="text" name="stadt" placeholder="City*" required>
+                        <input id="form-state" type="text" name="bundesland" placeholder="State" required>
+                        <input id="form-country" type="text" name="land" placeholder="Country" required>
+                        <input id="form-email" type="text" name="email" placeholder="Email">
                         <div class = "privacy">
                             <label for="visibility">private?</label>
-                            <input type="checkbox" name="visibility" value=1 checked>
+                            <input id="form-privacy" type="checkbox" name="visibility" value=1 checked>
                         </div>
-                        <select name="add-owner" id="add-owner">
+                        <select id="form-owner" name="add-owner" id="add-owner">
                             <option value="normalo">Normalo</option>
                             <option value="admina">Admina</option>
                         </select>
-                        <input type="submit" name="Add" value="Add">
+                        <input id="form-add" type="submit" name="Add" value="Add">
+                        <div class = "update-delete-buttons">
+                            <input id="form-update" type="button" name="update" value="Update">
+                            <input id="form-delete" type="button" name="delete" value="Delete">
+                        </div>
                     </form>
             </div>
             <div id="update-delete-address-screen" class="forms">

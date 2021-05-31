@@ -43,10 +43,10 @@ body {
     display:block;
     color: #1b1b1b;
 }
-input{
+input[type="submit"], input[type="button"]{
     cursor:pointer;
 }
-.login-form {
+.login-form{
     margin-left: auto;
     margin-right: auto;
     width: 30em;
@@ -80,9 +80,8 @@ input{
     color: white;
     transition: all 0.3s ease;
 }
-.forms input[type=radio]{
-    display:inline;
-}
+
+
 .login-form input[type=submit]{
     border-radius: 10px;
     padding: 1em 10em 1em 10em ;
@@ -193,13 +192,48 @@ input{
     color: #1b1b1b;
     
 }
+#add-new-address-screen {
+    display:block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    
+    width: 20%;
+    background-color: white;
+}
 
+label{
+    display:inline;
+}
+.add-form{
+    display:block;
+}
+
+#form-add{
+    margin:auto;
+}
+.add-form input[type=text], .add-form input[type=number], .add-form select{
+    display:block;
+    background-color:transparent;
+    border-radius: 0px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    border: none;
+    border-bottom: 2px solid #1b1b1b;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: left;
+}
 .contact-btn:hover {
     transition: all 0.3s ease;
     color: #EDF5E1;
     background-color: #1b1b1b;
 }
-/*#main-screen,*/ #update-delete-address-screen, #add-new-address-screen/*, #map-with-buttons*/{
+/*#main-screen,*/ #update-delete-address-screen /*#add-new-address-screen/*, #map-with-buttons*/{
     display:none;
     overflow: hidden;
     background-color: blue;
@@ -253,4 +287,7 @@ input{
 #welcome-div.load-out {
     opacity: 0;
     transition: opacity 0.6s ease-in-out;
+}
+#wrong-address-div {
+    color:red;
 }
