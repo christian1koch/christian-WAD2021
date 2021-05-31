@@ -173,12 +173,18 @@ function selectSexRadio(sex){
 }
 function selectOwnerInForm(owner){
     if (owner.username == "normalo"){
-        formSelectOwner.childNodes[0].selected = "selected";
+        formSelectOwner.childNodes[3].selected = "false";
+        formSelectOwner.childNodes[1].selected = "true";
+        console.log("owner Normalo");
     } else {
-        formSelectOwner.childNodes[1].selected = "selected";
+        formSelectOwner.childNodes[1].selected = "false";
+        formSelectOwner.childNodes[3].selected = "true";
+        console.log(formSelectOwner.childNodes);
+        console.log("owner Admina");
     }
 }
 function openUpdateScreen(contact){
+    console.log("opening Update")
     setFormButtons("update");
     showHideAddressError("hide");
     openCloseForm();
