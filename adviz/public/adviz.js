@@ -1,13 +1,14 @@
 var userList;
 var normalo;
 var admina;
-httpGetAsync('http://localhost:8000/users',users2UserList);
+var myUrlUsers = 'http://localhost:8000/users'
+httpGetAsync(myUrlUsers,users2UserList);
 
 
-var contact1 = new Contact("F","Johanna", "Rueda", "Müllerstraße 151", "13353", "Berlin", "Berlin", "Deutschland","contact1@web.de" , true, admina);
-var contact2 = new Contact("D","Daniel", "Sight", "kantstraße 104", "10627", "Berlin", "Berlin", "Deutschland","contact4@web.de" , false, admina);
-var contact3 = new Contact("F","Megan Thee", "Stallion", "schillerstraße 10", "10625", "Berlin", "Berlin", "Deutschland","contact2@web.de" , true, normalo);
-var contact4 = new Contact("M","Alexander", "Sanchez", "paracelsusstraße 13", "13187", "Berlin", "Berlin", "Deutschland","contact3@web.de" , false, normalo);
+var contact1 = new Contact("F","Johanna", "Rueda", "Müllerstraße 151", "13353", "Berlin", "Berlin", "Deutschland","contact1@web.de" , true, "admina");
+var contact2 = new Contact("D","Daniel", "Sight", "kantstraße 104", "10627", "Berlin", "Berlin", "Deutschland","contact4@web.de" , false, "admina");
+var contact3 = new Contact("F","Megan Thee", "Stallion", "schillerstraße 10", "10625", "Berlin", "Berlin", "Deutschland","contact2@web.de" , true, "normalo");
+var contact4 = new Contact("M","Alexander", "Sanchez", "paracelsusstraße 13", "13187", "Berlin", "Berlin", "Deutschland","contact3@web.de" , false, "normalo");
 var contactList = [contact1, contact2, contact3, contact4];
 var currentUser;
 var currentUserContacts;
@@ -98,15 +99,29 @@ function Contact(sex, firstName, lastName, streetAndNumber, zipCode, city, state
 
 
 //FUNCTIONS------------------------------------
-function httpGetAsync(theUrl, callback)
+function httpGetAsync(url, callback)
 {
-    var xmlHttp = new XMLHttpRequest();
+    let xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             callback(xmlHttp.responseText);
     }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.open("GET", url, true); // true for asynchronous 
     xmlHttp.send(null);
+}
+function httpPostUserAsync(url, callback)
+{
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", url, true); // true for asynchronous 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify({
+        "username" : usernameField.value,
+        "password" : passwordField.value
+    }));
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback;
+    }
 }
 
 function users2UserList(res){
@@ -182,7 +197,7 @@ function selectSexRadio(sex){
     }
 }
 function selectOwnerInForm(owner){
-    if (owner.username == "normalo"){
+    if (owner == "normalo"){
         formSelectOwner.childNodes[3].selected = "false";
         formSelectOwner.childNodes[1].selected = "true";
         console.log("owner Normalo");
@@ -290,7 +305,7 @@ checkErrorMessages = () => {
     errorMessages[1].style.display = "none";
     errorMessages[0].style.display = "none";
     if (usernameField.value == "admina" || usernameField.value == "normalo") {
-        if (passwordField.value == "123") return true;
+        if (passwordField.value == normalo.password) return true;
         else errorMessages[1].style.display = "block";
     } else errorMessages[0].style.display = "block";
 }
@@ -331,8 +346,9 @@ Adds each contact to owner.sidebarEle
 */
 myContacts = () => {
     adresses.innerHTML = ""; 
+
     const tempcurrentUserContacts = contactList.filter((contact) => {
-        return contact.owner == currentUser;
+        return contact.owner == currentUser.username;
     })
     return tempcurrentUserContacts;
 }
@@ -344,7 +360,7 @@ allContacts = () => {
             return contactList;
         }
         else {
-            if (currentUser == contact.owner) return contact;
+            if (currentUser.username == contact.owner) return contact;
             return contact.private == false;
         }
     })
@@ -425,7 +441,7 @@ getOwnership = () => {
         owner = userList.filter((user) => {
             return user.username == ownerName;
         })
-        return owner[0];
+        return owner[0].username;
     }
 }
 getContactInfoOnSubmit = () => {
@@ -482,8 +498,8 @@ showHideAddressError = (showHide) =>{
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     
-    
-   loginCredentials();
+    httpPostUserAsync(myUrlUsers, loginCredentials());
+   
 
 });
 
