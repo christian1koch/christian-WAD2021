@@ -140,7 +140,17 @@ function httpPostContactAsync(url, callback, contact)
         callback;
     }
 }
-
+function httpPutContactAsync(url, contact)
+{
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("PUT", url +"/"+ currentUpdateElement.ident, true); // true for asynchronous 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify(contact));
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        httpGetAsync(myUrlUsers,users2UserList);
+    }
+}
 
 function users2UserList(res){
     userList  = JSON.parse(res);
@@ -569,6 +579,7 @@ formDeleteButton.addEventListener("click", () => {
 formUpdateButton.addEventListener("click", () => {
     showHideAddressError("hide");
     let contact = getContactInfoOnSubmit();
+    httpPutContactAsync(myUrlContacts, contact);
     checkAddressAndDo(contact, todoAfterCheckAddressUpdate);
 })
 

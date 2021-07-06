@@ -44,6 +44,17 @@ router.delete('/:id', getContact, async (req, res) => {
     }
 })
 
+//Update
+router.put('/:id', getContact, async (req, res) => {
+
+    try {
+      const updatedContact = await res.contact.save()
+      res.json(updatedcontact)
+    } catch (err) {
+      res.status(400).json({ message: err.message })
+    }
+  })
+
 async function getContact(req, res, next){
     let contact;
     try {
