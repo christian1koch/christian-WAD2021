@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());
 const usersRouter = require('./routes/users');
+const contactsRouter = require('./routes/contacts');
 app.use('/users', usersRouter);
+app.use('/contacts', contactsRouter);
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));

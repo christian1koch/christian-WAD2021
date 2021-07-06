@@ -4,14 +4,17 @@ const contactSchema = new mongoose.Schema({
     sex: {
         type: String
     },
-    firstame: {
+    firstName: {
         type: String
     },
-    lastname: {
+    lastName: {
         type: String
     },
     streetAndNumber: {
         type: String
+    },
+    zipCode: {
+        type: Number
     },
     city: {
         type: String

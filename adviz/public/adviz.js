@@ -1,15 +1,13 @@
 var userList;
 var normalo;
 var admina;
+var contactList;
 var myUrlUsers = 'http://localhost:8000/users'
+var myUrlContacts = 'http://localhost:8000/contacts';
+var currentId = -1;
 httpGetAsync(myUrlUsers,users2UserList);
+httpGetAsync(myUrlContacts, contacts2ContactList);
 
-
-var contact1 = new Contact("F","Johanna", "Rueda", "Müllerstraße 151", "13353", "Berlin", "Berlin", "Deutschland","contact1@web.de" , true, "admina");
-var contact2 = new Contact("D","Daniel", "Sight", "kantstraße 104", "10627", "Berlin", "Berlin", "Deutschland","contact4@web.de" , false, "admina");
-var contact3 = new Contact("F","Megan Thee", "Stallion", "schillerstraße 10", "10625", "Berlin", "Berlin", "Deutschland","contact2@web.de" , true, "normalo");
-var contact4 = new Contact("M","Alexander", "Sanchez", "paracelsusstraße 13", "13187", "Berlin", "Berlin", "Deutschland","contact3@web.de" , false, "normalo");
-var contactList = [contact1, contact2, contact3, contact4];
 var currentUser;
 var currentUserContacts;
 var markersOnMap = [];
@@ -64,7 +62,8 @@ var options = {
 }
 var map = new google.maps.Map(mapDiv, options);
 const showMyContactsBtn = document.getElementById("show-my-contacts").addEventListener("click", ()=> {
-    showContacts(myContacts)
+    //showContacts(myContacts)
+    httpShowContacts();
 });
 const showAllContactsBtn = document.getElementById("show-all-contacts").addEventListener("click", ()=> {
     showContacts(allContacts)
@@ -109,6 +108,12 @@ function httpGetAsync(url, callback)
     xmlHttp.open("GET", url, true); // true for asynchronous 
     xmlHttp.send(null);
 }
+function httpDeleteAsync(url)
+{
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("DELETE", url + "/" + currentUpdateElement.ident, true); // true for asynchronous 
+    xmlHttp.send();
+}
 function httpPostUserAsync(url, callback)
 {
     let xmlHttp = new XMLHttpRequest();
@@ -123,12 +128,39 @@ function httpPostUserAsync(url, callback)
             callback;
     }
 }
+function httpPostContactAsync(url, callback, contact)
+{
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("POST", url, true); // true for asynchronous 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(JSON.stringify(contact));
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        httpGetAsync(myUrlUsers,users2UserList);
+        callback;
+    }
+}
+
 
 function users2UserList(res){
     userList  = JSON.parse(res);
     normalo = userList[1];
     admina = userList[0];
 }
+
+function contacts2ContactList(res){
+    contactList = JSON.parse(res);
+}
+function contacts2ContactListWithShowContacts(res){
+    contactList = JSON.parse(res);
+    showContacts(myContacts);
+}
+
+function httpGetContactsFromDB(){
+    httpGetAsync(myUrlContacts, contacts2ContactList);
+    showContacts(myContacts);
+}
+
 
 function initMap(){
     for (let i = 0; i < markersOnMap.length; i++) {
@@ -227,7 +259,7 @@ function openUpdateScreen(contact){
     formEmail.value = contact.email;
     formPrivacyCheckbox.checked = contact.private;
     selectOwnerInForm(contact.owner);
-    if (contact.owner != currentUser && !currentUser.admin){
+    if (contact.owner != currentUser.username && !currentUser.admin){
         blockEditForm(true);
     } else {
         blockEditForm(false);
@@ -366,10 +398,15 @@ allContacts = () => {
     })
     return tempcurrentUserContacts;
 }
+function httpShowContacts() {
+    httpGetAsync(myUrlContacts, contacts2ContactListWithShowContacts);
+}
 showContacts = (contactListType) => {
         currentUserContacts = contactListType();
         currentUserContacts.forEach((contact) => {
         const contactOnLeft = document.createElement('input');
+        contactOnLeft.ident = contact._id;
+        
         contactOnLeft.setAttribute("type", "button");
         contactOnLeft.setAttribute("class", "contact-btn");
         contactOnLeft.setAttribute("name", contact.firstName + " " + contact.lastName);
@@ -384,6 +421,7 @@ showContacts = (contactListType) => {
             console.log("hi");
             openUpdateScreen(contact);
             currentUpdateElement = contactOnLeft;
+            console.log("id = " + contactOnLeft.ident);
         });
         adresses.appendChild(contactOnLeft);
         contact.sidebarElem = contactOnLeft;
@@ -435,12 +473,14 @@ getSexInForm =() =>{
     else if (formSexRadioBtns[0].childNodes[9].checked == true) return "D";
 }
 getOwnership = () => {
-    if (currentUser == normalo) return normalo;
+    if (currentUser == normalo) return normalo.username;
     else {
         let ownerName = formSelectOwner.options[formSelectOwner.selectedIndex].value;
         owner = userList.filter((user) => {
             return user.username == ownerName;
         })
+        console.log("this new owner is...")
+        console.log(owner)
         return owner[0].username;
     }
 }
@@ -454,24 +494,28 @@ getContactInfoOnSubmit = () => {
 checkAddressAndDo = (contact, toDo) => {
     geocoder.geocode( { 'address': contact.streetAndNumber + " " + contact.zipCode}, function(results, status) {
         if (status == 'OK') {
+            let currentCoords = [results[0].geometry.location.lat(), results[0].geometry.location.lng()]
+            contact.geoCoord = currentCoords;
             toDo(contact);
         } else {
             toDo(false);
         }
       });
 }
-todoAfterCheckAddress = (contact) =>{
+todoAfterCheckAddress = (contact) =>{ // ACA HAGO EL HTERTETEHKEWWEUIBKWAEBZBZWABKNWNIL
     if (contact == false){
+        
         showHideAddressError("show");
     }else {
-        contactList.push(contact);
-        console.log(currentUserContacts);
-        showContacts(myContacts);
-        console.log(contactList);
+        console.log('creating contact...');
+        httpPostContactAsync(myUrlContacts, showContacts(myContacts), contact);
+        
         openCloseForm();
     }
     
 }
+
+
 todoAfterCheckAddressUpdate = (contact) =>{
     if (contact == false){
         showHideAddressError("show");
@@ -512,12 +556,14 @@ formContact.addEventListener("submit",(e) => {
 
 })
 formDeleteButton.addEventListener("click", () => {
+    httpDeleteAsync(myUrlContacts)
     let newContactList = contactList.filter((contact) => {
         return contact.sidebarElem != currentUpdateElement;
     })
     contactList = newContactList;
     openCloseForm();
-    showContacts(myContacts);
+    //showContacts(myContacts);
+    httpShowContacts();
 
 })
 formUpdateButton.addEventListener("click", () => {

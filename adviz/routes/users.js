@@ -5,7 +5,6 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
-        console.log(users);
         res.json(users);
     } catch (err) {
         res.status(500).json({message: err.message});
@@ -18,7 +17,6 @@ router.post('/', async (req, res) => {
             
             if (users[i].username == req.body.username && users[i].password == req.body.password){
                 res.status(200);
-                console.log("works")
                 return res.json(users[i]);
                 
             }
